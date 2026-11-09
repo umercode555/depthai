@@ -1,0 +1,62 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Depth</title>
+<link rel="stylesheet" href="sidepanel.css"></head><body>
+<header>
+  <div class="brand"><i class="mark"></i><h1>Depth</h1></div>
+  <div class="hchips"><span class="chip" id="chipBrain">Brain</span><span class="chip" id="chipCam">Camera</span><button class="icon" id="pause" title="Pause Depth">Pause</button></div>
+</header>
+<nav id="tabs">
+  <button data-t="now" class="on">Now</button><button data-t="talk">Talk</button><button data-t="time">Timeline</button><button data-t="goals">Goals</button><button data-t="mods">Modules</button><button data-t="depth">Depth</button><button data-t="setup">Setup</button>
+</nav>
+<main>
+<section id="s-now">
+  <div class="orbwrap"><canvas id="orb" width="440" height="440"></canvas><div class="orbtxt"><div id="stateTitle">Observing</div><div id="stateSub">starting up</div></div></div>
+  <div class="phases" id="phases"></div>
+  <button class="primary" id="look">Look now</button>
+  <div class="card" id="hyp"><h3>Current reading</h3><div class="muted">No reading yet. Depth forms one after the first Gemini turn.</div></div>
+  <div class="card"><h3>Seeing right now</h3><div class="grid" id="live"></div></div>
+  <div class="card"><h3>Senses</h3><div class="senses" id="senses"></div></div>
+</section>
+<section id="s-talk" hidden>
+  <div class="talkbar"><span class="muted" id="talkState"></span><span><button class="ghost sm" id="q30">Quiet 30 min</button><button class="ghost sm" id="qoff">Resume</button></span></div>
+  <div id="chat"></div>
+  <div class="composer"><textarea id="inp" rows="1" placeholder="Talk to Depth…"></textarea><button class="ghost" id="mic" title="Voice">Mic</button><button class="primary sm" id="send">Send</button></div>
+</section>
+<section id="s-time" hidden>
+  <div class="card"><h3>Today</h3><div id="strip" class="strip"></div><div class="legend" id="legend"></div></div>
+  <div class="card"><h3>Camera and screen samples</h3><div class="samples" id="samples"></div></div>
+  <div class="card"><h3>Segments</h3><div id="segs"></div></div>
+</section>
+<section id="s-goals" hidden>
+  <div class="card"><h3>Today's plan</h3><textarea id="plan" rows="3" placeholder="e.g. Math chapter 5, two hours. Then Fiverr gig."></textarea><button class="primary sm" id="savePlan">Save plan</button></div>
+  <div class="card"><h3>Commitments</h3><div id="commits"></div>
+  <div class="row"><input id="cText" placeholder="Add a promise"><button class="ghost" id="cAdd">Add</button></div></div>
+  <div class="card"><h3>Companion memory</h3><div id="mem" class="muted"></div></div>
+</section>
+<section id="s-mods" hidden><div id="modList"></div></section>
+<section id="s-depth" hidden>
+  <div class="card depthcard"><div class="score"><div id="dScore">0</div><div><div id="dZone">Surface</div><div class="muted" id="dHint"></div></div></div><div id="dBars"></div></div>
+  <div class="card"><h3>Edge cases handled</h3><div id="cases" class="tags"></div></div>
+</section>
+<section id="s-setup" hidden>
+  <div class="card"><h3>Gemini brain</h3><label>Gemini chat link<input id="geminiUrl"></label><div class="row"><button class="ghost" id="openG">Open Gemini tab</button><button class="ghost" id="camSetup">Camera and mic setup</button><button class="ghost" id="camTest">Test camera</button></div><div class="muted" id="testOut"></div></div>
+  <div class="card"><h3>Senses</h3>
+    <label class="tg"><input type="checkbox" id="camera"> Webcam frames</label>
+    <label class="tg"><input type="checkbox" id="screen"> Screenshots of active tab</label>
+    <label class="tg"><input type="checkbox" id="chatRead"> Read AI chat text (DeepSeek, Claude, ChatGPT)</label>
+    <label class="tg"><input type="checkbox" id="social"> WhatsApp and messaging module</label>
+    <label class="tg"><input type="checkbox" id="voice"> Speak replies aloud</label></div>
+  <div class="card"><h3>Rhythm</h3>
+    <label>Ambient sample every (min)<input type="number" id="heartbeatMin" min="2"></label>
+    <label>Discussion pause before judging (sec)<input type="number" id="lullSec" min="30"></label>
+    <label>Video watch before discussing (sec)<input type="number" id="discussDelaySec" min="15"></label>
+    <label>Study inactivity check (min)<input type="number" id="inactivityMin" min="2"></label>
+    <label>Default block length (hours)<input type="number" id="blockHours" min="0.25" step="0.25"></label>
+    <label>Study sites allowed during block<input id="studyAllow" placeholder="chat.deepseek.com, claude.ai"></label></div>
+  <div class="card"><h3>Privacy</h3><label>Never capture on sites containing<input id="excluded"></label>
+    <div class="muted">Typing: only key counts and backspaces. Never what you type.</div>
+    <h3 style="margin-top:14px">Sent to Gemini</h3><div id="ledger" class="muted"></div>
+    <div class="row"><button class="ghost" id="export">Export timeline</button><button class="danger" id="wipe">Delete all Depth data</button></div></div>
+  <button class="primary" id="saveSet">Save settings</button>
+</section>
+</main>
+<script src="sidepanel.js"></script></body></html>
